@@ -25,15 +25,24 @@ namespace ProcessingTechnologyCalc
         {
             get
             {
-                return ProcessLine.Length;
+                return ProcessLine.Length; 
             }
         }
-        [CategoryAttribute("2. Геометрия объекта"), DisplayName("Угол"), DescriptionAttribute("Угол отрезка в градусах")]
-        public double Angle
+
+        public double AngleRound
         {
             get
             {
-                return Math.Round(ProcessLine.Angle * 180 / Math.PI, 3);
+                return Math.Round(ProcessLine.Angle, 6);
+            }
+        }
+
+        [CategoryAttribute("2. Геометрия объекта"), DisplayName("Угол"), DescriptionAttribute("Угол отрезка в градусах")]
+        public double AngleDegrees
+        {
+            get
+            {
+                return Math.Round(AngleRound * 180 / Math.PI, 3);
             }
         }
         [CategoryAttribute("3. Геометрия траектории"), DisplayName("Длина"), DescriptionAttribute("Длина отрезка")]
@@ -49,7 +58,7 @@ namespace ProcessingTechnologyCalc
         {
             get
             {
-                return ToolpathCurve != null ? Math.Round(((Math.PI * 2 - ToolpathLine.Angle) % Math.PI) * 180 / Math.PI, 3) : 0;
+                return ToolpathCurve != null ? Math.Round(((Math.PI * 2 - AngleRound) % Math.PI) * 180 / Math.PI, 3) : 0;
                 //Math.Round((ToolpathCurve as Line).Angle * 180 / Math.PI, 3) 
             }
         }

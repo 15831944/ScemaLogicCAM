@@ -55,8 +55,9 @@ namespace ProcessingTechnologyCalc
                 {
                     case ObjectType.Line:
                         //ind = (obj.ToolpathLine.Angle > 0 && obj.ToolpathLine.Angle <= Math.PI) ? 1 - rest : rest;
-                        vertex = (obj.ToolpathLine.Angle > 0 && obj.ToolpathLine.Angle <= Math.PI) ^ hasRest ? VertexType.End : VertexType.Start;
-                        angle[0] = angle[1] = (obj as ProcessObjectLine).ToolpathAngle;
+                        var processObjectLine = obj as ProcessObjectLine;
+                        vertex = (processObjectLine.AngleRound > 0 && processObjectLine.AngleRound <= Math.PI) ^ hasRest ? VertexType.End : VertexType.Start;
+                        angle[0] = angle[1] = processObjectLine.ToolpathAngle;
                         z = 0;
                         break;
                     case ObjectType.Arc:

@@ -540,7 +540,7 @@ namespace ProcessingTechnologyCalc
             switch (obj.ObjectType)
             {
                 case ObjectType.Line:
-                    hasOffset = (obj.ProcessLine.Angle > AngleTolerance && obj.ProcessLine.Angle <= cPI) ^ (obj.Side == SideType.Left);
+                    hasOffset = ((obj as ProcessObjectLine).AngleRound > 0 && (obj as ProcessObjectLine).AngleRound <= cPI) ^ (obj.Side == SideType.Left);
                     break;
 
                 case ObjectType.Arc:
