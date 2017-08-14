@@ -52,7 +52,7 @@ namespace ProcessingTechnologyCalc
                 Options.Frequency = Convert.ToInt32(edFrequency.Text);
                 Options.DepthAll = Convert.ToInt32(edDepthAll.Text);
                 Options.Depth = Convert.ToInt32(edDepth.Text);
-                Options.ToolNo = Convert.ToInt32(edToolNo.Value);
+                Options.ToolNo = Convert.ToInt32(edToolNo.Value);            
             }
             catch (Exception)
             {
@@ -236,6 +236,7 @@ namespace ProcessingTechnologyCalc
 
         public void UpdateControls()
         {
+            ProcessOptions.ZSafety = Convert.ToInt32(edZSafety.Text);
             if (edToolDiameter.Modified || edToolThickness.Modified)
             {
                 SetTool();

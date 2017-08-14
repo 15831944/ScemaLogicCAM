@@ -82,7 +82,7 @@ namespace ProcessingTechnologyCalc
                     //                ProgramList.Add(new ProgramLine(0, 0, "XYC", 0, point[vertex.Index()].X, point[vertex.Index()].Y, angle[vertex.Index()]));
                     AddSetToolCommand("XYC", point[vertex.Index()].X, point[vertex.Index()].Y, angle[vertex.Index()], obj.ToString());
                     //                ProgramList.Add(new ProgramLine(0, 0, "XYZ", 0, point[vertex.Index()].X, point[vertex.Index()].Y, 20));
-                    AddSetToolCommand("XYZ", point[vertex.Index()].X, point[vertex.Index()].Y, 20, obj.ToString());
+                    AddSetToolCommand("XYZ", point[vertex.Index()].X, point[vertex.Index()].Y, ProcessOptions.ZSafety, obj.ToString());
                 }
                 else
                 {
@@ -171,7 +171,7 @@ namespace ProcessingTechnologyCalc
 
 //                ProgramList.Add(new ProgramLine(0, 0, "XYZ", 0, point[vertex.Index()].X, point[vertex.Index()].Y, 20));
                 if (ProcessOptions.Machine == ProcessOptions.TTypeMachine.Denver)
-                    AddSetToolCommand("XYZ", point[vertex.Index()].X, point[vertex.Index()].Y, 20, obj.ToString());
+                    AddSetToolCommand("XYZ", point[vertex.Index()].X, point[vertex.Index()].Y, ProcessOptions.ZSafety, obj.ToString());
                 else
                     AddCommand("G0" + ToGCode("X", point[vertex.Index()].X)
                                     + ToGCode("Y", point[vertex.Index()].Y)

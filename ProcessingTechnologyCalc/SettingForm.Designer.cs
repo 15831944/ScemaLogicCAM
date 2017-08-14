@@ -57,6 +57,8 @@
             this.DenverBtn = new System.Windows.Forms.RadioButton();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.RavelliBtn = new System.Windows.Forms.RadioButton();
+            this.edZSafety = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.edToolNo)).BeginInit();
             this.gbTool.SuspendLayout();
             this.gbMaterial.SuspendLayout();
@@ -225,7 +227,7 @@
             this.gbTool.Controls.Add(this.label6);
             this.gbTool.Controls.Add(this.label5);
             this.gbTool.Controls.Add(this.label4);
-            this.gbTool.Location = new System.Drawing.Point(37, 288);
+            this.gbTool.Location = new System.Drawing.Point(37, 310);
             this.gbTool.Name = "gbTool";
             this.gbTool.Size = new System.Drawing.Size(203, 135);
             this.gbTool.TabIndex = 2;
@@ -301,6 +303,8 @@
             // 
             // gbOptions
             // 
+            this.gbOptions.Controls.Add(this.edZSafety);
+            this.gbOptions.Controls.Add(this.label9);
             this.gbOptions.Controls.Add(this.edGreatSpeed);
             this.gbOptions.Controls.Add(this.label1);
             this.gbOptions.Controls.Add(this.label2);
@@ -313,7 +317,7 @@
             this.gbOptions.Controls.Add(this.label7);
             this.gbOptions.Location = new System.Drawing.Point(37, 123);
             this.gbOptions.Name = "gbOptions";
-            this.gbOptions.Size = new System.Drawing.Size(203, 159);
+            this.gbOptions.Size = new System.Drawing.Size(203, 181);
             this.gbOptions.TabIndex = 1;
             this.gbOptions.TabStop = false;
             this.gbOptions.Text = "Параметры обработки";
@@ -339,12 +343,13 @@
             // 
             this.groupBox1.Controls.Add(this.RavelliBtn);
             this.groupBox1.Controls.Add(this.DenverBtn);
-            this.groupBox1.Location = new System.Drawing.Point(37, 429);
+            this.groupBox1.Location = new System.Drawing.Point(37, 451);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(203, 80);
             this.groupBox1.TabIndex = 4;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Станок";
+            this.groupBox1.Visible = false;
             // 
             // RavelliBtn
             // 
@@ -356,6 +361,23 @@
             this.RavelliBtn.Text = "Ravelli";
             this.RavelliBtn.UseVisualStyleBackColor = true;
             this.RavelliBtn.CheckedChanged += new System.EventHandler(this.RavelliBtn_CheckedChanged);
+            // 
+            // edZSafety
+            // 
+            this.edZSafety.Location = new System.Drawing.Point(94, 149);
+            this.edZSafety.Name = "edZSafety";
+            this.edZSafety.Size = new System.Drawing.Size(84, 20);
+            this.edZSafety.TabIndex = 8;
+            this.edZSafety.Text = "20";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(19, 152);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(68, 13);
+            this.label9.TabIndex = 9;
+            this.label9.Text = "Z безопасн.";
             // 
             // SettingForm
             // 
@@ -411,5 +433,7 @@
         private System.Windows.Forms.RadioButton DenverBtn;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.RadioButton RavelliBtn;
+        private System.Windows.Forms.TextBox edZSafety;
+        private System.Windows.Forms.Label label9;
     }
 }

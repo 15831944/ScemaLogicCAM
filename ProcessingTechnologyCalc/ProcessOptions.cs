@@ -13,6 +13,8 @@ namespace ProcessingTechnologyCalc
 
     public class ProcessOptions 
     {
+        public static int ZSafety = 20;
+
         public int MaterialType;
         public int GreatSpeed;
         public int SmallSpeed;
