@@ -40,7 +40,7 @@ namespace ProcessingTechnologyCalc
         {
             get
             {
-                return ToolpathCurve != null ? ToolpathLine.Length : 0;
+                return 0; // ToolpathCurve != null ? ToolpathLine.Length : 0;
             }
         }
     }

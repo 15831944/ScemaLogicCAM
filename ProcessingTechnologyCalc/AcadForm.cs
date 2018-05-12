@@ -310,6 +310,9 @@ namespace ProcessingTechnologyCalc
                     case ObjectType.Arc:
                         angle = (obj.ProcessArc.StartAngle + obj.ProcessArc.TotalAngle / 2 + cPI2) % c2PI;
                         break;
+                    case ObjectType.Polyline:
+                        angle = obj.ProcessCurve.GetFirstDerivative(promptOptions.BasePoint).GetAngleTo(Vector3d.XAxis);
+                        break;
                 }
                 return Math.Sin(promptResult.Value - angle) > 0 ? SideType.Left : SideType.Right;
             }
@@ -456,7 +459,7 @@ namespace ProcessingTechnologyCalc
             }
             if (obj.ObjectType == ObjectType.Arc && (
                 (obj.ProcessArc.StartAngle < cPI2 && obj.ProcessArc.EndAngle > cPI2) ||
-                (obj.ProcessArc.StartAngle < cPI + cPI2 && obj.ProcessArc.EndAngle > cPI + cPI2)))
+                (obj.ProcessArc.StartAngle < cPI + cPI2 && (obj.ProcessArc.EndAngle > cPI + cPI2 || obj.ProcessArc.EndAngle < obj.ProcessArc.StartAngle))))
             {
                 Application.ShowAlertDialog("Обработка дуги \"" + obj.ToString() + "\" невозможна");
                 return;
