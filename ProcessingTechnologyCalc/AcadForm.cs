@@ -461,7 +461,7 @@ namespace ProcessingTechnologyCalc
                 (obj.ProcessArc.StartAngle < cPI2 && obj.ProcessArc.EndAngle > cPI2) ||
                 (obj.ProcessArc.StartAngle < cPI + cPI2 && (obj.ProcessArc.EndAngle > cPI + cPI2 || obj.ProcessArc.EndAngle < obj.ProcessArc.StartAngle))))
             {
-                Application.ShowAlertDialog("Обработка дуги \"" + obj.ToString() + "\" невозможна");
+                Application.ShowAlertDialog($"Обработка дуги {obj} невозможна - дуга пересекает угол 90 или 270 градусов. Текущие углы: начальный {180 / cPI * obj.ProcessArc.StartAngle}, конечный {180 / cPI * obj.ProcessArc.EndAngle}");
                 return;
             }
             double s = Math.Sqrt(obj.DepthAll * (obj.Diameter - obj.DepthAll)) + ExactlyIncrease;
