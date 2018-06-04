@@ -461,11 +461,13 @@ namespace ProcessingTechnologyCalc
                 (obj.ProcessArc.StartAngle < cPI2 && obj.ProcessArc.EndAngle > cPI2) ||
                 (obj.ProcessArc.StartAngle < cPI + cPI2 && (obj.ProcessArc.EndAngle > cPI + cPI2 || obj.ProcessArc.EndAngle < obj.ProcessArc.StartAngle))))
             {
-                Application.ShowAlertDialog($"Обработка дуги {obj} невозможна - дуга пересекает угол 90 или 270 градусов. Текущие углы: начальный {180 / cPI * obj.ProcessArc.StartAngle}, конечный {180 / cPI * obj.ProcessArc.EndAngle}");
+                Application.ShowAlertDialog("Обработка дуги невозможна - дуга пересекает угол 90 или 270 градусов. Текущие углы: начальный " + 
+                    (180 / cPI * obj.ProcessArc.StartAngle).ToString() + ", конечный " + (180 / cPI * obj.ProcessArc.EndAngle).ToString());
+                //Application.ShowAlertDialog($"Обработка дуги {obj} невозможна - дуга пересекает угол 90 или 270 градусов. Текущие углы: начальный {180 / cPI * obj.ProcessArc.StartAngle}, конечный {180 / cPI * obj.ProcessArc.EndAngle}");
                 return;
             }
             double s = Math.Sqrt(obj.DepthAll * (obj.Diameter - obj.DepthAll)) + ExactlyIncrease;
-            if ((obj.IsBeginExactly || obj.IsEndExactly) && (obj.Length / 2 <= s))
+            if ((obj.IsBeginExactly || obj.IsEndExactly) && (obj.Length <= s))
             {
                 Application.ShowAlertDialog("Обработка объекта " + obj.ToString() + " невозможна вследствие слишком малой длины");
                 return;
