@@ -47,6 +47,9 @@ namespace ProcessingTechnologyCalc
             RefreshProcessCurveData();
 
             this.processOptions = new ProcessOptions(processOptions);
+
+            TopEdge = true;
+            VerticalAngleDeg = 0;
         }
         protected void ConvertToPointF(Point3d point3d, ref PointF pointF)
         {
@@ -82,6 +85,12 @@ namespace ProcessingTechnologyCalc
                 ToolpathArc = toolpathCurve as Arc;
             }
         }
+
+
+        [Browsable(false)]
+        public List<ProcessAction> ProcessActions { get; set; }
+
+
         [CategoryAttribute("1. Общие"), DisplayName("Название"), DescriptionAttribute("Название объекта")]
         public string ObjectName { get; set; }
 
@@ -207,5 +216,18 @@ namespace ProcessingTechnologyCalc
             get { return IsExactly[VertexType.End.Index()]; }
             set { IsExactly[VertexType.End.Index()] = value; }
         }
+
+        [CategoryAttribute("5. Параметры обработки"), DisplayName("Вертикальный угол"), DescriptionAttribute("Вертикальный угол наклона фрезы")]
+        public double VerticalAngleDeg { get; set; }
+
+        [Browsable(false)]
+        public double VerticalAngle 
+        {
+            get { return VerticalAngleDeg * Math.PI / 180; }
+        }
+
+        [CategoryAttribute("5. Параметры обработки"), DisplayName("Верхняя кромка"), DescriptionAttribute("Да - верхняя кромка детали; Нет - нижняя")]
+        public bool TopEdge { get; set; }
+
     }
 }

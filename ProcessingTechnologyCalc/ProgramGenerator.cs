@@ -227,9 +227,9 @@ namespace ProcessingTechnologyCalc
             ProgramList.Add(new ProgramLine(gCode, null, axis, null, null, null, null, null, ""));
         }
 
-        public void AddCommand(string line)
+        public void AddCommand(string line, Curve curve = null)
         {
-            ProgramList.Add(new ProgramLine(line));
+            ProgramList.Add(new ProgramLine(line, curve));
         }
 
         public string ToGCode(string axis, double par)

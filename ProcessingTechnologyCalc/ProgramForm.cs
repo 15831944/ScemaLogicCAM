@@ -24,17 +24,18 @@ namespace ProcessingTechnologyCalc
         }
         public void RefreshGrid()
         {
-            dataGridView.DataSource = null;
-            dataGridView.DataSource = List;
+            //dataGridView.DataSource = null;
+            //dataGridView.DataSource = List;
+            bindingSource1.DataSource = List;
             toolStripButtonSave.Enabled = true;
         }
 
         private void toolStripButtonSave_Click(object sender, EventArgs e)
         {
-            saveFileDialog.Filter = Options.Machine == ProcessOptions.TTypeMachine.Denver ?
-                                    "Denver (*.csv)|*.csv" : "Ravelli (*.mpf)|*.mpf";
-            saveFileDialog.FileName = Options.Machine == ProcessOptions.TTypeMachine.Denver ?
-                                    "*.csv" : "*.mpf";
+            saveFileDialog.Filter = ProcessOptions.Machine == ProcessOptions.TTypeMachine.Denver ?
+                                    "Denver (*.csv)|*.csv" : "Donatoni (*.pgm)|*.pgm";
+            saveFileDialog.FileName = ProcessOptions.Machine == ProcessOptions.TTypeMachine.Denver ?
+                                    "*.csv" : "*.pgm";
 
             if (saveFileDialog.ShowDialog() == DialogResult.OK)
             {
@@ -50,7 +51,7 @@ namespace ProcessingTechnologyCalc
                             {
                                 if (dataGridView.Columns[cell.ColumnIndex].HeaderText != "ObjectName")
                                 {
-                                    line += cell.Value + (Options.Machine == ProcessOptions.TTypeMachine.Denver ? ";" : " ");
+                                    line += cell.Value + (ProcessOptions.Machine == ProcessOptions.TTypeMachine.Denver ? ";" : " ");
                                 }
                             }
                             streamwriter.WriteLine(line);
@@ -92,6 +93,20 @@ namespace ProcessingTechnologyCalc
                 MessageBox.Show("Файл \"" + ProgramPath + "\" не найден", "Предупреждение", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
 
+        }
+
+        private void bindingSource1_CurrentChanged(object sender, EventArgs e)
+        {
+            var action = bindingSource1.Current as ProgramLine;
+            if (action != null)
+            {
+                var list = new List<Autodesk.AutoCAD.DatabaseServices.ObjectId>();
+                if (action.Curve != null)
+                    list.Add(action.Curve.ObjectId);
+                var editor = Autodesk.AutoCAD.ApplicationServices.Application.DocumentManager.MdiActiveDocument.Editor;
+                editor.SetImpliedSelection(list.ToArray());
+                editor.UpdateScreen();
+            }
         }
     }
 }

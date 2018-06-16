@@ -53,18 +53,22 @@
             this.edMaterialThickness = new System.Windows.Forms.TextBox();
             this.lbMaterialThickness = new System.Windows.Forms.Label();
             this.gbOptions = new System.Windows.Forms.GroupBox();
-            this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
-            this.DenverBtn = new System.Windows.Forms.RadioButton();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.RavelliBtn = new System.Windows.Forms.RadioButton();
             this.edZSafety = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
+            this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
+            this.DenverBtn = new System.Windows.Forms.RadioButton();
+            this.gbMachine = new System.Windows.Forms.GroupBox();
+            this.RavelliBtn = new System.Windows.Forms.RadioButton();
+            this.edAxisDist = new System.Windows.Forms.TextBox();
+            this.edVertAxisDist = new System.Windows.Forms.TextBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.edToolNo)).BeginInit();
             this.gbTool.SuspendLayout();
             this.gbMaterial.SuspendLayout();
             this.gbOptions.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
-            this.groupBox1.SuspendLayout();
+            this.gbMachine.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -322,46 +326,6 @@
             this.gbOptions.TabStop = false;
             this.gbOptions.Text = "Параметры обработки";
             // 
-            // errorProvider
-            // 
-            this.errorProvider.ContainerControl = this;
-            // 
-            // DenverBtn
-            // 
-            this.DenverBtn.AutoSize = true;
-            this.DenverBtn.Checked = true;
-            this.DenverBtn.Location = new System.Drawing.Point(22, 28);
-            this.DenverBtn.Name = "DenverBtn";
-            this.DenverBtn.Size = new System.Drawing.Size(60, 17);
-            this.DenverBtn.TabIndex = 3;
-            this.DenverBtn.TabStop = true;
-            this.DenverBtn.Text = "Denver";
-            this.DenverBtn.UseVisualStyleBackColor = true;
-            this.DenverBtn.CheckedChanged += new System.EventHandler(this.DenverBtn_CheckedChanged);
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.RavelliBtn);
-            this.groupBox1.Controls.Add(this.DenverBtn);
-            this.groupBox1.Location = new System.Drawing.Point(37, 451);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(203, 80);
-            this.groupBox1.TabIndex = 4;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Станок";
-            this.groupBox1.Visible = false;
-            // 
-            // RavelliBtn
-            // 
-            this.RavelliBtn.AutoSize = true;
-            this.RavelliBtn.Location = new System.Drawing.Point(22, 57);
-            this.RavelliBtn.Name = "RavelliBtn";
-            this.RavelliBtn.Size = new System.Drawing.Size(57, 17);
-            this.RavelliBtn.TabIndex = 4;
-            this.RavelliBtn.Text = "Ravelli";
-            this.RavelliBtn.UseVisualStyleBackColor = true;
-            this.RavelliBtn.CheckedChanged += new System.EventHandler(this.RavelliBtn_CheckedChanged);
-            // 
             // edZSafety
             // 
             this.edZSafety.Location = new System.Drawing.Point(94, 149);
@@ -379,16 +343,93 @@
             this.label9.TabIndex = 9;
             this.label9.Text = "Z безопасн.";
             // 
+            // errorProvider
+            // 
+            this.errorProvider.ContainerControl = this;
+            // 
+            // DenverBtn
+            // 
+            this.DenverBtn.AutoSize = true;
+            this.DenverBtn.Location = new System.Drawing.Point(22, 28);
+            this.DenverBtn.Name = "DenverBtn";
+            this.DenverBtn.Size = new System.Drawing.Size(60, 17);
+            this.DenverBtn.TabIndex = 3;
+            this.DenverBtn.Text = "Denver";
+            this.DenverBtn.UseVisualStyleBackColor = true;
+            this.DenverBtn.CheckedChanged += new System.EventHandler(this.DenverBtn_CheckedChanged);
+            // 
+            // gbMachine
+            // 
+            this.gbMachine.Controls.Add(this.RavelliBtn);
+            this.gbMachine.Controls.Add(this.DenverBtn);
+            this.gbMachine.Location = new System.Drawing.Point(37, 451);
+            this.gbMachine.Name = "gbMachine";
+            this.gbMachine.Size = new System.Drawing.Size(203, 93);
+            this.gbMachine.TabIndex = 4;
+            this.gbMachine.TabStop = false;
+            this.gbMachine.Text = "Станок";
+            // 
+            // RavelliBtn
+            // 
+            this.RavelliBtn.AutoSize = true;
+            this.RavelliBtn.Checked = true;
+            this.RavelliBtn.Location = new System.Drawing.Point(22, 57);
+            this.RavelliBtn.Name = "RavelliBtn";
+            this.RavelliBtn.Size = new System.Drawing.Size(68, 17);
+            this.RavelliBtn.TabIndex = 4;
+            this.RavelliBtn.TabStop = true;
+            this.RavelliBtn.Text = "Donatoni";
+            this.RavelliBtn.UseVisualStyleBackColor = true;
+            this.RavelliBtn.CheckedChanged += new System.EventHandler(this.RavelliBtn_CheckedChanged);
+            // 
+            // edAxisDist
+            // 
+            this.edAxisDist.Location = new System.Drawing.Point(156, 577);
+            this.edAxisDist.Name = "edAxisDist";
+            this.edAxisDist.Size = new System.Drawing.Size(84, 20);
+            this.edAxisDist.TabIndex = 9;
+            this.edAxisDist.Text = "200";
+            // 
+            // edVertAxisDist
+            // 
+            this.edVertAxisDist.Location = new System.Drawing.Point(156, 551);
+            this.edVertAxisDist.Name = "edVertAxisDist";
+            this.edVertAxisDist.Size = new System.Drawing.Size(84, 20);
+            this.edVertAxisDist.TabIndex = 8;
+            this.edVertAxisDist.Text = "16";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(36, 584);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(111, 13);
+            this.label10.TabIndex = 11;
+            this.label10.Text = "Расст. между осями";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(36, 558);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(114, 13);
+            this.label11.TabIndex = 10;
+            this.label11.Text = "Расст. до вертик.оси";
+            // 
             // SettingForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.edAxisDist);
+            this.Controls.Add(this.edVertAxisDist);
+            this.Controls.Add(this.label10);
+            this.Controls.Add(this.label11);
+            this.Controls.Add(this.gbMachine);
             this.Controls.Add(this.gbOptions);
             this.Controls.Add(this.gbMaterial);
             this.Controls.Add(this.gbTool);
             this.Name = "SettingForm";
-            this.Size = new System.Drawing.Size(272, 602);
+            this.Size = new System.Drawing.Size(272, 721);
             ((System.ComponentModel.ISupportInitialize)(this.edToolNo)).EndInit();
             this.gbTool.ResumeLayout(false);
             this.gbTool.PerformLayout();
@@ -397,9 +438,10 @@
             this.gbOptions.ResumeLayout(false);
             this.gbOptions.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
+            this.gbMachine.ResumeLayout(false);
+            this.gbMachine.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -431,9 +473,13 @@
         private System.Windows.Forms.RadioButton radioButton2;
         private System.Windows.Forms.RadioButton radioButton1;
         private System.Windows.Forms.RadioButton DenverBtn;
-        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox gbMachine;
         private System.Windows.Forms.RadioButton RavelliBtn;
         private System.Windows.Forms.TextBox edZSafety;
         private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.TextBox edAxisDist;
+        private System.Windows.Forms.TextBox edVertAxisDist;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label11;
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Autodesk.AutoCAD.DatabaseServices;
 
 namespace ProcessingTechnologyCalc
 {
@@ -19,6 +20,8 @@ namespace ProcessingTechnologyCalc
         public string C { get; set; }
         public string Z { get; set; }
         public string ObjectName { get; set; }
+
+        public Curve Curve { get; set; }
 
         //public ProgramLine(int g_code, int? m_code, string axis, int? speed, double? x, double? y, double? c, double? z)
         //{
@@ -80,10 +83,11 @@ namespace ProcessingTechnologyCalc
             }
             ObjectName = objectName;
         }
-        public ProgramLine(string line)
+        public ProgramLine(string line, Curve curve = null)
         {
             Line_no = "N"+ (++ Count).ToString();
             G_Code = line;
+            Curve = curve;
         }
     }
 }

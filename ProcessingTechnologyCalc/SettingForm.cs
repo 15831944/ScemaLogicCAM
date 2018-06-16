@@ -21,25 +21,26 @@ namespace ProcessingTechnologyCalc
         {
             InitializeComponent();
 
-            var pathName = Assembly.GetExecutingAssembly().Location;
-            ToolPath = pathName.Replace("out.dll", ToolPath);
+            //var pathName = Assembly.GetExecutingAssembly().Location;
+            //ToolPath = pathName.Replace("out.dll", ToolPath);
 
             Options = processOptions;
             AcadForm = acadForm;
-            DenverBtn.Checked = Options.Machine == ProcessOptions.TTypeMachine.Denver;
-            RavelliBtn.Checked = Options.Machine == ProcessOptions.TTypeMachine.Ravelli;
+            DenverBtn.Checked = ProcessOptions.Machine == ProcessOptions.TTypeMachine.Denver;
+            RavelliBtn.Checked = ProcessOptions.Machine == ProcessOptions.TTypeMachine.Ravelli;
             
             LoadTools();
 
             //cbMaterialType.SelectedIndex = Options.MaterialType;
-            //edMaterialThickness.Text = (Options.DepthAll + 2).ToString();
-            //edGreatSpeed.Text = Options.GreatSpeed.ToString();
-            //edSmallSpeed.Text = Options.SmallSpeed.ToString();
-            //edFrequency.Text = Options.Frequency.ToString();
-            //edDepthAll.Text = Options.DepthAll.ToString();
-            //edDepth.Text = Options.Depth.ToString();
-            //edToolNo.Value = Options.ToolNo;
-            //edToolNo.Maximum = Options.ToolsList.Count;
+            edMaterialThickness.Text = (Options.DepthAll + 2).ToString();
+            edGreatSpeed.Text = Options.GreatSpeed.ToString();
+            edSmallSpeed.Text = Options.SmallSpeed.ToString();
+            edFrequency.Text = Options.Frequency.ToString();
+            edDepthAll.Text = Options.DepthAll.ToString();
+            edDepth.Text = Options.Depth.ToString();
+            edToolNo.Value = Options.ToolNo;
+            edToolNo.Maximum = Options.ToolsList.Count;
+
             SetTool(Options.ToolNo);
         }
         public void UpdateParams()
@@ -56,13 +57,13 @@ namespace ProcessingTechnologyCalc
             }
             catch (Exception)
             {
-                MessageBox.Show("Ошибка при преобразовании параметров настройки", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                //MessageBox.Show("Ошибка при преобразовании параметров настройки", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
         private void edToolNo_ValueChanged(object sender, EventArgs e)
         {
-            SetTool(Decimal.ToInt32(edToolNo.Value));
+            //SetTool(Decimal.ToInt32(edToolNo.Value));
         }
 
         private void SetTool(int toolNo)
@@ -73,6 +74,9 @@ namespace ProcessingTechnologyCalc
 
         private void LoadTools()
         {
+            Options.ToolsList.Add(new Tool { Diameter = 400, Thickness = 2});
+            return;
+
             try
             {
                 using (StreamReader sr = new StreamReader(ToolPath))
@@ -197,12 +201,12 @@ namespace ProcessingTechnologyCalc
 
         private void DenverBtn_CheckedChanged(object sender, EventArgs e)
         {
-            Options.Machine = ProcessOptions.TTypeMachine.Denver;
+            ProcessOptions.Machine = ProcessOptions.TTypeMachine.Denver;
         }
 
         private void RavelliBtn_CheckedChanged(object sender, EventArgs e)
         {
-            Options.Machine = ProcessOptions.TTypeMachine.Ravelli;
+            ProcessOptions.Machine = ProcessOptions.TTypeMachine.Ravelli;
         }
 
         private void edToolDiameter_Validating(object sender, CancelEventArgs e)
@@ -237,6 +241,8 @@ namespace ProcessingTechnologyCalc
         public void UpdateControls()
         {
             ProcessOptions.ZSafety = Convert.ToInt32(edZSafety.Text);
+            ProcessOptions.VertAxisDist = Convert.ToInt32(edVertAxisDist.Text);
+            ProcessOptions.AxisDist = Convert.ToInt32(edAxisDist.Text);
             if (edToolDiameter.Modified || edToolThickness.Modified)
             {
                 SetTool();

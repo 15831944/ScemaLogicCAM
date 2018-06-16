@@ -9,7 +9,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>ProcessingTechnologyCalc</RootNamespace>
-    <AssemblyName>out</AssemblyName>
+    <AssemblyName>out1</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <FileUpgradeFlags>
@@ -63,6 +63,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AcadForm.cs" />
+    <Compile Include="AcadFormRavelli.cs" />
     <Compile Include="ACADProcessesView.cs" />
     <Compile Include="EnumExtension.cs" />
     <Compile Include="ObjectForm.cs">
@@ -71,6 +72,7 @@
     <Compile Include="ObjectForm.Designer.cs">
       <DependentUpon>ObjectForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="ProcessAction.cs" />
     <Compile Include="ProcessArc.cs" />
     <Compile Include="ProcessLine.cs" />
     <Compile Include="ProcessObject.cs" />
@@ -83,6 +85,7 @@
       <DependentUpon>ProgramForm.cs</DependentUpon>
     </Compile>
     <Compile Include="ProgramGenerator.cs" />
+    <Compile Include="ProgramGeneratorRavelli.cs" />
     <Compile Include="ProgramLine.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
@@ -117,6 +120,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Properties\DataSources\ProgramLine.datasource" />
     <None Include="Resources\cancel16.bmp" />
   </ItemGroup>
   <ItemGroup>

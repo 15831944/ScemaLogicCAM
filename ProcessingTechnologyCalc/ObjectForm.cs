@@ -128,7 +128,10 @@ namespace ProcessingTechnologyCalc
 
         private void toolStripButtonGenerate_Click(object sender, EventArgs e)
         {
-            Owner.ProgramGenerate();
+            if (ProcessOptions.Machine == ProcessOptions.TTypeMachine.Denver)
+                Owner.ProgramGenerate();
+            else 
+                Owner.ProgramGenerateRavelli();
         }
 
         private void toolStripButtonSetSide_Click(object sender, EventArgs e)

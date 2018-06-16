@@ -6,7 +6,7 @@ using Autodesk.AutoCAD.EditorInput;
 
 namespace ProcessingTechnologyCalc
 {
-    public partial class AcadProcessesView
+    public partial class AcadProcessesView 
     {
         private PaletteSet PaletteSet;
 

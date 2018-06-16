@@ -14,6 +14,8 @@ namespace ProcessingTechnologyCalc
     public class ProcessOptions 
     {
         public static int ZSafety = 20;
+        public static int VertAxisDist = 16;
+        public static int AxisDist = 200;
 
         public int MaterialType;
         public int GreatSpeed;
@@ -26,7 +28,7 @@ namespace ProcessingTechnologyCalc
         public int ToolNo;
 
         public enum TTypeMachine { Denver, Ravelli };
-        public TTypeMachine Machine;
+        public static TTypeMachine Machine = ProcessOptions.TTypeMachine.Ravelli;
 
         public ProcessOptions()
         {
@@ -38,8 +40,7 @@ namespace ProcessingTechnologyCalc
             this.Depth = 16;
             this.ToolNo = 1;
             this.ToolsList = new List<Tool>();
-            this.Machine = TTypeMachine.Denver;
-
+            //this.Machine = TTypeMachine.Denver;
         }
         public ProcessOptions(ProcessOptions processOptions)
         {
@@ -51,7 +52,7 @@ namespace ProcessingTechnologyCalc
             this.Depth        = processOptions.Depth;
             this.ToolNo       = processOptions.ToolNo;
             this.ToolsList    = processOptions.ToolsList;
-            this.Machine = processOptions.Machine;
+            //this.Machine = processOptions.Machine;
         }
     }
 }

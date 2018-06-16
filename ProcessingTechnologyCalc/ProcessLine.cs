@@ -58,7 +58,9 @@ namespace ProcessingTechnologyCalc
         {
             get
             {
-                return ToolpathCurve != null ? Math.Round(((Math.PI * 2 - AngleRound) % Math.PI) * 180 / Math.PI, 3) : 0;
+                return ProcessOptions.Machine == ProcessOptions.TTypeMachine.Denver 
+                    ? (ToolpathCurve != null ? Math.Round(((Math.PI * 2 - AngleRound) % Math.PI) * 180 / Math.PI, 3) : 0)
+                    : (!TopEdge ^ Side == SideType.Right ? (360 - AngleDegrees) % 360 : (540 - AngleDegrees) % 360);
                 //Math.Round((ToolpathCurve as Line).Angle * 180 / Math.PI, 3) 
             }
         }

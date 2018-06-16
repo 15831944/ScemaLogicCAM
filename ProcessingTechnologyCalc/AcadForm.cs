@@ -61,14 +61,25 @@ namespace ProcessingTechnologyCalc
             // TODO удалить обработчики
             //obj.ProcessCurve.Modified -= ProcessCurveModifiedEventHandler;  
             //obj.ProcessCurve.Erased -= ProcessCurveErasedEventHandler;
-            if (obj.ToolpathCurve != null)
+            if (obj.ToolpathCurve != null || obj.ProcessActions != null)
             {
                 using (DocumentLock doclock = Document.LockDocument())
                 {
                     using (AcDb.Transaction trans = TransactionManager.StartTransaction())
                     {
-                        trans.GetObject(obj.ToolpathCurve.ObjectId, AcDb.OpenMode.ForWrite);
-                        obj.ToolpathCurve.Erase();
+                        if (obj.ToolpathCurve != null)
+                        {
+                            trans.GetObject(obj.ToolpathCurve.ObjectId, AcDb.OpenMode.ForWrite);
+                            obj.ToolpathCurve.Erase();
+                        }
+                        else
+                        {
+                            obj.ProcessActions.ForEach(p =>
+                                {
+                                    trans.GetObject(p.Toolpath.ObjectId, AcDb.OpenMode.ForWrite);
+                                    p.Toolpath.Erase();
+                                });
+                        }
                         trans.Commit();
                         Editor.UpdateScreen();
                     }
@@ -161,7 +172,7 @@ namespace ProcessingTechnologyCalc
                         SetProcessSide(addList[0]);
                     }
                 }
-                while (addList.RemoveAll(p => p.ToolpathCurve != null) > 0 && addList.Count > 0);
+                while (addList.RemoveAll(p => p.ToolpathCurve != null || p.ProcessActions != null) > 0 && addList.Count > 0);
             }
         }
 
@@ -369,12 +380,12 @@ namespace ProcessingTechnologyCalc
             VertexType srcVertex = obj.ConnectVertex[vertex.Index()];
             SideType containedSide = vertex != srcVertex ? srcObj.Side : srcObj.Side.Opposite();
 
-            if (obj.IsExactly[vertex.Index()] != srcObj.IsExactly[srcVertex.Index()] || obj.Side != containedSide || obj.ToolpathCurve == null)
+            if (obj.IsExactly[vertex.Index()] != srcObj.IsExactly[srcVertex.Index()] || obj.Side != containedSide || (obj.ToolpathCurve == null && obj.ProcessActions == null))
             {
                 obj.IsExactly[vertex.Index()] = srcObj.IsExactly[srcVertex.Index()];
                 vertex = vertex.Opposite();
 
-                if ((obj.Side != containedSide && obj.ConnectObject[vertex.Index()] != null) || obj.ToolpathCurve == null)
+                if ((obj.Side != containedSide && obj.ConnectObject[vertex.Index()] != null) || (obj.ToolpathCurve == null && obj.ProcessActions == null))
                 {
                     obj.Side = containedSide;
                     obj.IsExactly[vertex.Index()] = CalcExactlyEnd(obj, vertex);
@@ -451,10 +462,15 @@ namespace ProcessingTechnologyCalc
             return isExactly;
         }
 
-        void ConstructToolpathObject(ProcessObject obj)
+        public void ConstructToolpathObject(ProcessObject obj)
         {
             if (obj.Side == SideType.None)
             {
+                return;
+            }
+            if (ProcessOptions.Machine == ProcessOptions.TTypeMachine.Ravelli)
+            {
+                ConstructToolpathObjectRavelli(obj);
                 return;
             }
             if (obj.ObjectType == ObjectType.Arc && (
@@ -601,7 +617,7 @@ namespace ProcessingTechnologyCalc
             }
         }
 
-        [Autodesk.AutoCAD.Runtime.CommandMethod("pline")]
+        //[Autodesk.AutoCAD.Runtime.CommandMethod("pline")]
         public void Polyline()
         {
             using (DocumentLock doclock = Document.LockDocument())
