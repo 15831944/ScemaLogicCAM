@@ -97,11 +97,20 @@ namespace ProcessingTechnologyCalc
             {
                 using (AcDb.Transaction trans = TransactionManager.StartTransaction())
                 {
-                    foreach( var obj in (ObjectList.FindAll(p => p.ToolpathCurve != null)))
-                    {
-                        trans.GetObject(obj.ToolpathCurve.ObjectId, AcDb.OpenMode.ForWrite);
-                        obj.ToolpathCurve.Erase();
-                    }
+                    foreach (var obj in (ObjectList.FindAll(p => p.ToolpathCurve != null || p.ProcessActions != null)))
+                        if (obj.ToolpathCurve != null)
+                        {
+                            trans.GetObject(obj.ToolpathCurve.ObjectId, AcDb.OpenMode.ForWrite);
+                            obj.ToolpathCurve.Erase();
+                        }
+                        else
+                        {
+                            obj.ProcessActions.ForEach(p =>
+                            {
+                                trans.GetObject(p.Toolpath.ObjectId, AcDb.OpenMode.ForWrite);
+                                p.Toolpath.Erase();
+                            });
+                        }
                     trans.Commit();
                     Editor.UpdateScreen();
                 }

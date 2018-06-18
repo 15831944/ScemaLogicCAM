@@ -21,12 +21,13 @@ namespace ProcessingTechnologyCalc
             List = list;
             InitializeComponent();
             Options = processOptions;
+            bindingSource1.DataSource = List;
         }
         public void RefreshGrid()
         {
             //dataGridView.DataSource = null;
             //dataGridView.DataSource = List;
-            bindingSource1.DataSource = List;
+            bindingSource1.ResetBindings(false);
             toolStripButtonSave.Enabled = true;
         }
 
