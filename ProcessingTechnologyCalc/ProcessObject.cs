@@ -207,5 +207,12 @@ namespace ProcessingTechnologyCalc
             get { return IsExactly[VertexType.End.Index()]; }
             set { IsExactly[VertexType.End.Index()] = value; }
         }
+
+        [CategoryAttribute("5. Параметры обработки"), DisplayName("Шаг в плоскости - величина"), DescriptionAttribute("Шаг в горизонтальной плоскости")]
+        public double PlaneStep { get; set; }
+
+        [CategoryAttribute("5. Параметры обработки"), DisplayName("Шаг в плоскости - количество"), DescriptionAttribute("Количество шагов в плоскости")]
+        public int PlaneStepCount { get; set; }
+
     }
 }

@@ -154,9 +154,13 @@ namespace ProcessingTechnologyCalc
                         case ObjectType.Arc:
 //                            ProgramList.Add(new ProgramLine(type[vertex.Index()], 0, "XYCZ", obj.GreatSpeed, point[vertex.Index()].X, point[vertex.Index()].Y, obj.ToolpathArc.Center.X, obj.ToolpathArc.Center.Y));
                             if (ProcessOptions.Machine == ProcessOptions.TTypeMachine.Denver)
+                            {
                                 AddProcessCommand(type[vertex.Index()], obj.GreatSpeed, point[vertex.Index()].X, point[vertex.Index()].Y, obj.ToolpathArc.Center.X, obj.ToolpathArc.Center.Y, obj.ToString());
+                                if (obj.PlaneStepCount != 0)
+                                    PlaneStepCalc(obj, type, point, angle, vertex, z);
+                            }
                             else
-                                AddCommand("G" + type[vertex.Index()].ToString() 
+                                AddCommand("G" + type[vertex.Index()].ToString()
                                                + ToGCode("X", point[vertex.Index()].X)
                                                + ToGCode("Y", point[vertex.Index()].Y)
                                                + ToGCode("I", obj.ToolpathArc.Center.X - xOld)
@@ -195,6 +199,21 @@ namespace ProcessingTechnologyCalc
             }
             ProgramForm.RefreshGrid();
             PaletteSet.Activate(2);
+        }
+
+        private void PlaneStepCalc(ProcessObject obj, int[] type, Point3d[] point, double[] angle, VertexType vertex, int z)
+        {
+            var curve = obj.ToolpathCurve;
+
+            for (int i = 0; i < obj.PlaneStepCount; i++)
+            {
+                curve = curve.GetOffsetCurves(obj.PlaneStep)[0] as Curve;
+                point[0] = curve.StartPoint;
+                point[1] = curve.EndPoint;
+                AddProcessCommand(1, obj.SmallSpeed, point[vertex.Index()].X, point[vertex.Index()].Y, angle[vertex.Index()], -z, obj.ToString());
+                vertex = vertex.Opposite();
+                AddProcessCommand(type[vertex.Index()], obj.GreatSpeed, point[vertex.Index()].X, point[vertex.Index()].Y, obj.ToolpathArc.Center.X, obj.ToolpathArc.Center.Y, obj.ToString());
+            }                 
         }
 
         private void AddProcessCommand(int type, int speed, double x, double y, double param1, double param2, string name)
