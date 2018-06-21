@@ -17,6 +17,11 @@ namespace ProcessingTechnologyCalc
             {
                 return;
             }
+            if (obj.VerticalAngleDeg == 90)
+            {
+                ConstructPlaneToolpath(obj);
+                return;
+            }
             double s = Math.Sqrt(obj.DepthAll * (obj.Diameter - obj.DepthAll / Math.Cos(obj.VerticalAngle))) + ExactlyIncrease;
             if ((obj.IsBeginExactly || obj.IsEndExactly) && (obj.Length <= s) || (obj.IsBeginExactly && obj.IsEndExactly) && (obj.Length <= 2 * s))
             {
@@ -315,6 +320,99 @@ namespace ProcessingTechnologyCalc
         public static Curve GetDisplacementCopy(Curve curve, double displacement)
         {
             return curve.GetTransformedCopy(Matrix3d.Displacement(new Vector3d(0, 0, displacement))) as Curve;
+        }
+
+        private void ConstructPlaneToolpath(ProcessObject obj)
+        {
+            using (DocumentLock doclock = Document.LockDocument())
+            {
+                using (AcDb.Transaction trans = TransactionManager.StartTransaction())
+                {
+                    BlockTable BlkTbl = trans.GetObject(Database.BlockTableId, OpenMode.ForRead, false) as BlockTable;
+                    BlockTableRecord BlkTblRec = trans.GetObject(BlkTbl[BlockTableRecord.ModelSpace], OpenMode.ForWrite, false) as BlockTableRecord;
+                    if (obj.ProcessActions != null)
+                        obj.ProcessActions.ForEach(p => trans.GetObject(p.Toolpath.ObjectId, OpenMode.ForWrite).Erase());
+
+                    obj.ProcessActions = new List<ProcessAction>();
+                    var layerId = GetProcessLayer(trans);
+                    var tanAngle = Math.Tan(obj.VerticalAngle);
+
+                    double angleStart = 0;
+                    double angleEnd = 0;
+                    if (obj.ObjectType == ObjectType.Arc)
+                    {
+                        angleStart = CalcAngle(obj, (obj.ProcessCurve as Arc).StartAngle);
+                        angleEnd = CalcAngle(obj, (obj.ProcessCurve as Arc).EndAngle);
+                    }
+                    var d = obj.DepthAll + obj.Depth;
+                    var sign = obj.Side == SideType.Left ^ obj.ObjectType == ObjectType.Arc ? 1 : -1;
+                    var tCurve0 = GetDisplacementCopy(obj.ProcessCurve, -ProcessOptions.Thickness);
+                    var tCurve = GetOffsetCopy(tCurve0, sign * d);
+                    var tCurve01 = tCurve;
+                    var isStart = true;
+                    var point = tCurve.StartPoint;
+                    obj.ProcessActions.Add(new ProcessAction
+                    {
+                        Command = "Опускание",
+                        Toolpath = new Line(new Point3d(point.X, point.Y, ProcessOptions.ZSafety), point),
+                        Point = point,
+                        Angle = isStart ? angleStart : angleEnd,
+                    });
+                    var point0 = point;
+
+                    do
+                    {
+                        d -= obj.Depth;
+                        if (d < 0)
+                            d = 0;
+                        tCurve = GetOffsetCopy(tCurve0, sign * d);
+                        point = isStart ? tCurve.StartPoint : tCurve.EndPoint;
+                        obj.ProcessActions.Add(new ProcessAction
+                        {
+                            Command = "Заглубление",
+                            Toolpath = new Line(point0, point),
+                            Point = point,
+                            Angle = isStart ? angleStart : angleEnd
+                        });
+                        isStart = !isStart;
+                        point0 = isStart ? tCurve.StartPoint : tCurve.EndPoint;
+                        obj.ProcessActions.Add(new ProcessAction
+                        {
+                            Command = "Рез",
+                            Toolpath = tCurve,
+                            Point = point0,
+                            Angle = isStart ? angleStart : angleEnd,
+                            IsClockwise = isStart
+                        });
+                    }
+                    while (d > 0);
+                    point = isStart ? tCurve01.StartPoint : tCurve01.EndPoint;
+                    obj.ProcessActions.Add(new ProcessAction
+                    {
+                        Command = "Отвод",
+                        Toolpath = new Line(point0, point),
+                        Point = point,
+                        Angle = isStart ? angleStart : angleEnd
+                    });
+                    obj.ProcessActions.Add(new ProcessAction
+                    {
+                        Command = "Подъем",
+                        Toolpath = new Line(point, new Point3d(point.X, point.Y, ProcessOptions.ZSafety)),
+                        Point = new Point3d(point.X, point.Y, ProcessOptions.ZSafety),
+                        Angle = isStart ? angleStart : angleEnd
+                    });
+
+                    obj.ProcessActions.ForEach(p =>
+                    {
+                        p.Toolpath.LayerId = layerId;
+                        BlkTblRec.AppendEntity(p.Toolpath);
+                        trans.AddNewlyCreatedDBObject(p.Toolpath, true);
+                        p.Toolpath.Erased += new ObjectErasedEventHandler(ToolpathCurveErasedEventHandlerRavelli);
+                    });
+                    trans.Commit();
+                    Editor.UpdateScreen();
+                }
+            }
         }
     }
 }

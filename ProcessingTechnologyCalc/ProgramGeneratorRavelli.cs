@@ -66,7 +66,7 @@ namespace ProcessingTechnologyCalc
                                         + ToGCode("Y", action.Point.Y )
                                         + ToGCode("Z", action.Point.Z ) // ZToGCode(action.Point.Z)
                                         + ((obj is ProcessObjectArc) ? ToGCode("C", action.Angle) : "")
-                                        + ToGCode("F", action.Command == "Рез" || action.Command == "Подъем" ? obj.GreatSpeed : obj.SmallSpeed), action.Toolpath);
+                                        + ToGCode("F", action.Command == "Рез" || action.Command == "Подъем" ? obj.GreatSpeed : obj.SmallSpeed), action.Toolpath, action.Command);
                     else
                         AddCommand("G" + (action.IsClockwise ? 2 : 3)
                                        + ToGCode("X", action.Point.X)
@@ -74,7 +74,7 @@ namespace ProcessingTechnologyCalc
                                        + ToGCode("I", ((Arc)action.Toolpath).Center.X)
                                        + ToGCode("J", ((Arc)action.Toolpath).Center.Y)
                                        + ToGCode("C", action.Angle)
-                                       + ToGCode("F", obj.GreatSpeed), action.Toolpath);
+                                       + ToGCode("F", obj.GreatSpeed), action.Toolpath, action.Command);
                 }
             }
             AddCommand("M5");

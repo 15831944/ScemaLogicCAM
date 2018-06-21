@@ -83,11 +83,12 @@ namespace ProcessingTechnologyCalc
             }
             ObjectName = objectName;
         }
-        public ProgramLine(string line, Curve curve = null)
+        public ProgramLine(string line, Curve curve = null, string objectName = null)
         {
             Line_no = "N"+ (++ Count).ToString();
             G_Code = line;
             Curve = curve;
+            ObjectName = objectName;
         }
     }
 }

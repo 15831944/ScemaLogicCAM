@@ -40,6 +40,7 @@
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.Line_no = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
@@ -94,7 +95,8 @@
             this.dataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Line_no,
-            this.Column1});
+            this.Column1,
+            this.Column2});
             this.dataGridView.DataSource = this.bindingSource1;
             this.dataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView.Location = new System.Drawing.Point(0, 25);
@@ -133,6 +135,13 @@
             this.Column1.HeaderText = "Команда";
             this.Column1.Name = "Column1";
             // 
+            // Column2
+            // 
+            this.Column2.DataPropertyName = "ObjectName";
+            this.Column2.HeaderText = "Описание";
+            this.Column2.Name = "Column2";
+            this.Column2.Width = 82;
+            // 
             // ProgramForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -160,6 +169,7 @@
         private System.Windows.Forms.BindingSource bindingSource1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Line_no;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
 
     }
 }
