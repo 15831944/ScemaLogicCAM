@@ -73,7 +73,7 @@ namespace ProcessingTechnologyCalc
                     }
                     if (!obj.TopEdge)
                     {
-                        s = (obj.DepthAll + ProcessOptions.ZSafety) * tanAngle;
+                        s = (ProcessOptions.Thickness + ProcessOptions.ZSafety) * tanAngle;
                         var sign = obj.Side == SideType.Left ^ obj.ObjectType == ObjectType.Arc ? -1 : 1;
                         var tCurve0 = GetDisplacementCopy(GetOffsetCopy(toolpathCurve, sign * s), ProcessOptions.ZSafety);
                         var isStart = true;
@@ -86,9 +86,9 @@ namespace ProcessingTechnologyCalc
                         do
                         {
                             d += obj.Depth;
-                            //if (d > obj.DepthAll)
-                            //    d = obj.DepthAll;
-                            s = (obj.DepthAll - d) * tanAngle;
+                            if (d > obj.DepthAll)
+                                d = obj.DepthAll;
+                            s = (ProcessOptions.Thickness - d) * tanAngle;
                             var tCurve = GetDisplacementCopy(GetOffsetCopy(toolpathCurve, sign * s), -d);
                             point = isStart ? tCurve.StartPoint : tCurve.EndPoint;
                             obj.ProcessActions.Add(new ProcessAction
@@ -135,8 +135,8 @@ namespace ProcessingTechnologyCalc
                         do
                         {
                             d += obj.Depth;
-                            //if (d > obj.DepthAll)
-                            //    d = obj.DepthAll;
+                            if (d > obj.DepthAll)
+                                d = obj.DepthAll;
                             s = d * tanAngle;
                             var tCurve = GetDisplacementCopy(GetOffsetCopy(toolpathCurve, sign * s), -d);
                             point = isStart ? tCurve.StartPoint : tCurve.EndPoint;

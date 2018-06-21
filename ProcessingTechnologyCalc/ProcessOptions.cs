@@ -16,6 +16,7 @@ namespace ProcessingTechnologyCalc
         public static int ZSafety = 20;
         public static int VertAxisDist = 16;
         public static int AxisDist = 200;
+        public static int Thickness = 30;
 
         public int MaterialType;
         public int GreatSpeed;

@@ -32,7 +32,7 @@ namespace ProcessingTechnologyCalc
             LoadTools();
 
             //cbMaterialType.SelectedIndex = Options.MaterialType;
-            edMaterialThickness.Text = (Options.DepthAll + 2).ToString();
+            edMaterialThickness.Text = ProcessOptions.Thickness.ToString();
             edGreatSpeed.Text = Options.GreatSpeed.ToString();
             edSmallSpeed.Text = Options.SmallSpeed.ToString();
             edFrequency.Text = Options.Frequency.ToString();
@@ -121,7 +121,8 @@ namespace ProcessingTechnologyCalc
             {
                 int thickness = Convert.ToInt32(edMaterialThickness.Text);
                 edDepthAll.Text = (thickness + 2).ToString();
-                edDepth.Text = Math.Ceiling((double)(thickness + 2) / 2).ToString();
+                if (String.IsNullOrEmpty(edDepth.Text))
+                    edDepth.Text = "2";
                 errorProvider.SetError(edDepthAll, "");
                 errorProvider.SetError(edDepth, "");
                 if (thickness > 30)
@@ -129,6 +130,7 @@ namespace ProcessingTechnologyCalc
                     edGreatSpeed.Text = "1000";
                     errorProvider.SetError(edGreatSpeed, "");
                 }
+                ProcessOptions.Thickness = thickness;
             }
         }
 
@@ -243,6 +245,7 @@ namespace ProcessingTechnologyCalc
             ProcessOptions.ZSafety = Convert.ToInt32(edZSafety.Text);
             ProcessOptions.VertAxisDist = Convert.ToInt32(edVertAxisDist.Text);
             ProcessOptions.AxisDist = Convert.ToInt32(edAxisDist.Text);
+            ProcessOptions.Thickness = Convert.ToInt32(edMaterialThickness.Text);
             if (edToolDiameter.Modified || edToolThickness.Modified)
             {
                 SetTool();
