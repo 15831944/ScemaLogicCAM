@@ -51,7 +51,8 @@ namespace ProcessingTechnologyCalc
                 AddCommand("G0" + ToGCode("X", point0.X)
                                 + ToGCode("Y", point0.Y));
                 AddCommand("G0" + ToGCode("Z", point0.Z)); //  ZToGCode(point0.Z));
-                AddCommand("G1" + ToGCode("C", angle) + ToGCode("A", obj.VerticalAngleDeg) + " F2000");
+                AddCommand("G1" + ToGCode("C", angle) + " F2000");
+                AddCommand("G1" + ToGCode("A", obj.VerticalAngleDeg) + " F2000");
 
                 if (obj == ObjectList.First())
                 {

@@ -50,7 +50,7 @@ namespace ProcessingTechnologyCalc
                             string line = "";
                             foreach (DataGridViewCell cell in row.Cells)
                             {
-                                if (dataGridView.Columns[cell.ColumnIndex].HeaderText != "ObjectName")
+                                if (dataGridView.Columns[cell.ColumnIndex].HeaderText != "ObjectName" && dataGridView.Columns[cell.ColumnIndex].HeaderText != "Описание")
                                 {
                                     line += cell.Value + (ProcessOptions.Machine == ProcessOptions.TTypeMachine.Denver ? ";" : " ");
                                 }
