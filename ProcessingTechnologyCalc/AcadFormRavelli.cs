@@ -344,10 +344,9 @@ namespace ProcessingTechnologyCalc
                         angleStart = CalcAngle(obj, (obj.ProcessCurve as Arc).StartAngle);
                         angleEnd = CalcAngle(obj, (obj.ProcessCurve as Arc).EndAngle);
                     }
-                    var d = obj.DepthAll + obj.Depth;
-                    var sign = obj.Side == SideType.Left ^ obj.ObjectType == ObjectType.Arc ? 1 : -1;
+                    var sign = obj.Side == SideType.Left ^ obj.ObjectType == ObjectType.Arc ? -1 : 1;
                     var tCurve0 = GetDisplacementCopy(obj.ProcessCurve, -ProcessOptions.Thickness);
-                    var tCurve = GetOffsetCopy(tCurve0, sign * d);
+                    var tCurve = GetOffsetCopy(tCurve0, -sign * obj.Depth);
                     var tCurve01 = tCurve;
                     var isStart = true;
                     var point = tCurve.StartPoint;
@@ -359,12 +358,12 @@ namespace ProcessingTechnologyCalc
                         Angle = isStart ? angleStart : angleEnd,
                     });
                     var point0 = point;
-
+                    var d = 0;
                     do
                     {
-                        d -= obj.Depth;
-                        if (d < 0)
-                            d = 0;
+                        d += obj.Depth;
+                        if (d > obj.DepthAll)
+                            d = obj.DepthAll;
                         tCurve = GetOffsetCopy(tCurve0, sign * d);
                         point = isStart ? tCurve.StartPoint : tCurve.EndPoint;
                         obj.ProcessActions.Add(new ProcessAction
@@ -385,7 +384,7 @@ namespace ProcessingTechnologyCalc
                             IsClockwise = isStart
                         });
                     }
-                    while (d > 0);
+                    while (d < obj.DepthAll);
                     point = isStart ? tCurve01.StartPoint : tCurve01.EndPoint;
                     obj.ProcessActions.Add(new ProcessAction
                     {

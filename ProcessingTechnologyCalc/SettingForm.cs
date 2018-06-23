@@ -125,11 +125,11 @@ namespace ProcessingTechnologyCalc
                     edDepth.Text = "2";
                 errorProvider.SetError(edDepthAll, "");
                 errorProvider.SetError(edDepth, "");
-                if (thickness > 30)
-                {
-                    edGreatSpeed.Text = "1000";
-                    errorProvider.SetError(edGreatSpeed, "");
-                }
+                //if (thickness > 30)
+                //{
+                //    edGreatSpeed.Text = "1000";
+                //    errorProvider.SetError(edGreatSpeed, "");
+                //}
                 ProcessOptions.Thickness = thickness;
             }
         }
