@@ -29,6 +29,7 @@ namespace ProcessingTechnologyCalc
             }
         }
 
+        [Browsable(false)]
         public double AngleRound
         {
             get

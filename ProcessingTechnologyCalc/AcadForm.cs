@@ -467,7 +467,7 @@ namespace ProcessingTechnologyCalc
                 return;
             }
             double s = Math.Sqrt(obj.DepthAll * (obj.Diameter - obj.DepthAll)) + ExactlyIncrease;
-            if ((obj.IsBeginExactly || obj.IsEndExactly) && (obj.Length <= s))
+            if (((obj.IsBeginExactly || obj.IsEndExactly) && (obj.Length <= s)) || ((obj.IsBeginExactly && obj.IsEndExactly) && (obj.Length <= 2 * s)))
             {
                 Application.ShowAlertDialog("Обработка объекта " + obj.ToString() + " невозможна вследствие слишком малой длины");
                 return;

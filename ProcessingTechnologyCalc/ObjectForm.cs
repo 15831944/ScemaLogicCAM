@@ -20,7 +20,7 @@ namespace ProcessingTechnologyCalc
             Owner = owner;
             listBox.DataSource = list;
             CurrencyManager = (CurrencyManager)BindingContext[listBox.DataSource];
-            toolStrip.ImageList = imageList;
+            //toolStrip.ImageList = imageList;
             toolStripButtonDraw.ImageIndex = 0;
         }
 
@@ -118,12 +118,12 @@ namespace ProcessingTechnologyCalc
                 Owner.SetExactlyEnd(CurrencyManager.Current as ProcessObject, VertexType.End);
             }
         }
-
+        
         private void toolStripButtonDraw_Click(object sender, EventArgs e)
         {
             Owner.TurnProcessLayer();
-            toolStripButtonDraw.ImageIndex = 1 - toolStripButtonDraw.ImageIndex;
-            toolStripButtonDraw.Text = toolStripButtonDraw.ImageIndex == 0 ? "Скрыть слой обработки" : "Показать слой обработки";
+            //toolStripButtonDraw.ImageIndex = 1 - toolStripButtonDraw.ImageIndex;
+            //toolStripButtonDraw.Text = "Скрыть слой обработки" : "Показать слой обработки";
         }
 
         private void toolStripButtonGenerate_Click(object sender, EventArgs e)
