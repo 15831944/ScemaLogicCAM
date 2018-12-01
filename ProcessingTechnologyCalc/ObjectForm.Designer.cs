@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ObjectForm));
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.listBox = new System.Windows.Forms.ListBox();
@@ -36,8 +35,8 @@
             this.toolStrip = new System.Windows.Forms.ToolStrip();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripButtonSave = new System.Windows.Forms.ToolStripButton();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.imageList = new System.Windows.Forms.ImageList(this.components);
             this.toolStripButtonDown = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonUp = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonDelete = new System.Windows.Forms.ToolStripButton();
@@ -47,7 +46,7 @@
             this.toolStripButtonDraw = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonSetSide = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonGenerate = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButtonSave = new System.Windows.Forms.ToolStripButton();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
@@ -111,22 +110,23 @@
             this.toolStripSeparator2.Name = "toolStripSeparator2";
             resources.ApplyResources(this.toolStripSeparator2, "toolStripSeparator2");
             // 
+            // toolStripButtonSave
+            // 
+            this.toolStripButtonSave.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButtonSave.Image = global::ProcessingTechnologyCalc.Properties.Resources.save_as16;
+            resources.ApplyResources(this.toolStripButtonSave, "toolStripButtonSave");
+            this.toolStripButtonSave.Name = "toolStripButtonSave";
+            // 
             // panel1
             // 
             this.panel1.Controls.Add(this.splitContainer1);
             resources.ApplyResources(this.panel1, "panel1");
             this.panel1.Name = "panel1";
             // 
-            // imageList
-            // 
-            this.imageList.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList.ImageStream")));
-            this.imageList.TransparentColor = System.Drawing.Color.Magenta;
-            this.imageList.Images.SetKeyName(0, "process_layer_off.bmp");
-            this.imageList.Images.SetKeyName(1, "process_layer_on.bmp");
-            // 
             // toolStripButtonDown
             // 
             this.toolStripButtonDown.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButtonDown.Image = global::ProcessingTechnologyCalc.Properties.Resources.arrowdown_blue16;
             resources.ApplyResources(this.toolStripButtonDown, "toolStripButtonDown");
             this.toolStripButtonDown.Name = "toolStripButtonDown";
             this.toolStripButtonDown.Click += new System.EventHandler(this.toolStripButtonMove_Click);
@@ -134,6 +134,7 @@
             // toolStripButtonUp
             // 
             this.toolStripButtonUp.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButtonUp.Image = global::ProcessingTechnologyCalc.Properties.Resources.arrowup_blue16;
             resources.ApplyResources(this.toolStripButtonUp, "toolStripButtonUp");
             this.toolStripButtonUp.Name = "toolStripButtonUp";
             this.toolStripButtonUp.Click += new System.EventHandler(this.toolStripButtonMove_Click);
@@ -141,6 +142,7 @@
             // toolStripButtonDelete
             // 
             this.toolStripButtonDelete.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButtonDelete.Image = global::ProcessingTechnologyCalc.Properties.Resources.delete16;
             resources.ApplyResources(this.toolStripButtonDelete, "toolStripButtonDelete");
             this.toolStripButtonDelete.Name = "toolStripButtonDelete";
             this.toolStripButtonDelete.Click += new System.EventHandler(this.toolStripButtonDelete_Click);
@@ -188,15 +190,10 @@
             // toolStripButtonGenerate
             // 
             this.toolStripButtonGenerate.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButtonGenerate.Image = global::ProcessingTechnologyCalc.Properties.Resources.insert_symbol16;
             resources.ApplyResources(this.toolStripButtonGenerate, "toolStripButtonGenerate");
             this.toolStripButtonGenerate.Name = "toolStripButtonGenerate";
             this.toolStripButtonGenerate.Click += new System.EventHandler(this.toolStripButtonGenerate_Click);
-            // 
-            // toolStripButtonSave
-            // 
-            this.toolStripButtonSave.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            resources.ApplyResources(this.toolStripButtonSave, "toolStripButtonSave");
-            this.toolStripButtonSave.Name = "toolStripButtonSave";
             // 
             // ObjectForm
             // 
@@ -208,6 +205,7 @@
             this.Name = "ObjectForm";
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
             this.toolStrip.ResumeLayout(false);
             this.toolStrip.PerformLayout();
@@ -231,7 +229,6 @@
         private System.Windows.Forms.ToolStripButton toolStripButtonSave;
         private System.Windows.Forms.ToolStripButton toolStripButtonSetSide;
         private System.Windows.Forms.ToolStripButton toolStripButtonDraw;
-        private System.Windows.Forms.ImageList imageList;
         private System.Windows.Forms.ToolStripButton toolStripButtonAdd;
         private System.Windows.Forms.ToolStripButton toolStripButtonRefresh;
         private System.Windows.Forms.ToolStripButton toolStripButtonDeleteAll;

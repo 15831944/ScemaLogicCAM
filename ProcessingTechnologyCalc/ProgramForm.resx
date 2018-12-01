@@ -120,19 +120,6 @@
   <metadata name="toolStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="toolStripButtonSave.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAE9SURBVDhP1dA7S8NQGMbxfJIq3czUb+Bg6dBVnDS0aNO0
-        oIOZCn4DF0FBwQu6tEGCCILuLVpsSWix2MQh5p4oKM6ZHnOKN2xCRFx84b8czvvjcKg/m+mZHQRBkBi5
-        97byOeSQK0uRC98j98aQr4Asy7H9CEjqH7wgqVhgdu4CtbUW9g8GqAsKGoKKekPF4ZESdgvhWIEoqvHA
-        0qKMYvEaHNcBz0tY5buoVtsolS6xvCKFi10wzBVYVo4GWLaPhfkmPO8FrvsM/d6FrhmwDB22aeCmPwRN
-        byOfP4sHGKYJx3kCPbU5Std0PHgmfJcAA6RS68hmxWigHAKFQguW9fgB2KYVAhYcS0NP6iGd3kAudxIN
-        VCrD8A/ao6e/A77vwLMNGPodpI6EiUkCnI4DZMghaW/3PLZMZit6+fdDUa9BoB4mDSqXsAAAAABJRU5E
-        rkJggg==
-</value>
-  </data>
   <metadata name="Line_no.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
