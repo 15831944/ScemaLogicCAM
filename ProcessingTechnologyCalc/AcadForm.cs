@@ -380,9 +380,8 @@ namespace ProcessingTechnologyCalc
                     obj.IsExactly[vertex.Index()] = CalcExactlyEnd(obj, vertex);
                 }
                 obj.Side = containedSide;
-                ConstructToolpathObject(obj);
-
-                CalcToolpath( obj.ConnectObject[vertex.Index()], obj.ConnectVertex[vertex.Index()]);
+                if (ConstructToolpathObject(obj))
+                    CalcToolpath( obj.ConnectObject[vertex.Index()], obj.ConnectVertex[vertex.Index()]);
             }
         }
 
@@ -451,11 +450,11 @@ namespace ProcessingTechnologyCalc
             return isExactly;
         }
 
-        void ConstructToolpathObject(ProcessObject obj)
+        bool ConstructToolpathObject(ProcessObject obj)
         {
             if (obj.Side == SideType.None)
             {
-                return;
+                return false;
             }
             if (obj.ObjectType == ObjectType.Arc && (
                 (obj.ProcessArc.StartAngle < cPI2 && obj.ProcessArc.EndAngle > cPI2) ||
@@ -464,13 +463,13 @@ namespace ProcessingTechnologyCalc
                 Application.ShowAlertDialog("Обработка дуги невозможна - дуга пересекает угол 90 или 270 градусов. Текущие углы: начальный " + 
                     (180 / cPI * obj.ProcessArc.StartAngle).ToString() + ", конечный " + (180 / cPI * obj.ProcessArc.EndAngle).ToString());
                 //Application.ShowAlertDialog($"Обработка дуги {obj} невозможна - дуга пересекает угол 90 или 270 градусов. Текущие углы: начальный {180 / cPI * obj.ProcessArc.StartAngle}, конечный {180 / cPI * obj.ProcessArc.EndAngle}");
-                return;
+                return false;
             }
             double s = Math.Sqrt(obj.DepthAll * (obj.Diameter - obj.DepthAll)) + ExactlyIncrease;
             if (((obj.IsBeginExactly || obj.IsEndExactly) && (obj.Length <= s)) || ((obj.IsBeginExactly && obj.IsEndExactly) && (obj.Length <= 2 * s)))
             {
                 Application.ShowAlertDialog("Обработка объекта " + obj.ToString() + " невозможна вследствие слишком малой длины");
-                return;
+                return false;
             }
             Curve toolpathCurve = obj.ProcessCurve.GetOffsetCurves(GetOffsetValue(obj))[0] as Curve;  // TODO расчет OffsetCurves + ModifiedEventHandler
 
@@ -536,6 +535,7 @@ namespace ProcessingTechnologyCalc
                     Editor.UpdateScreen();
                 }
             }
+            return true;
         }
 
         double GetOffsetValue(ProcessObject obj)
