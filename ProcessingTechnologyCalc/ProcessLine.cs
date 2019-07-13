@@ -59,7 +59,7 @@ namespace ProcessingTechnologyCalc
         {
             get
             {
-                return ToolpathCurve != null ? Math.Round(((Math.PI * 2 - AngleRound) % Math.PI) * 180 / Math.PI, 3) : 0;
+                return ToolpathCurve != null ? Math.Round(((Math.PI * 2 - AngleRound) % Math.PI) * 180 / Math.PI, 4) : 0;
                 //Math.Round((ToolpathCurve as Line).Angle * 180 / Math.PI, 3) 
             }
         }
