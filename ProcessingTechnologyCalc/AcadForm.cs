@@ -491,11 +491,11 @@ namespace ProcessingTechnologyCalc
 
                     if (obj.IsBeginExactly)
                     {
-                        (toolpathCurve as Arc).StartAngle = obj.ProcessArc.StartAngle + s / (toolpathCurve as Arc).Radius;
+                        (toolpathCurve as Arc).StartAngle = obj.ProcessArc.StartAngle + s / obj.ProcessArc.Radius;
                     }
                     if (obj.IsEndExactly)
                     {   
-                        (toolpathCurve as Arc).EndAngle = obj.ProcessArc.EndAngle - s / (toolpathCurve as Arc).Radius;
+                        (toolpathCurve as Arc).EndAngle = obj.ProcessArc.EndAngle - s / obj.ProcessArc.Radius;
                     }
                     break;
             }
